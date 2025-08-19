@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Portal de Notícias - Página Inicial{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h1 class="display-4 mb-4">Portal de Notícias</h1>
+                <p class="lead mb-5">Fique por dentro das principais notícias e acontecimentos do momento</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Notícias em Destaque -->
+<section class="featured-news">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="section-title">Notícias em Destaque</h2>
+            </div>
+        </div>
+        
+        <div class="row">
+            {% for noticia in noticias_destaque %}
+            <div class="col-12 mb-4">
+                <div class="news-item" {% if noticia.imagem %}style="background-image: url('{{ noticia.imagem.url }}')"{% endif %}>
+                    <div class="row g-0">
+                        <div class="col-12">
+                            <div class="news-content">
+                                <h3 class="news-title">
+                                    <a href="{{ noticia.get_absolute_url }}">{{ noticia.titulo }}</a>
+                                </h3>
+                                <p class="news-summary">{{ noticia.resumo }}</p>
+                                <div class="news-meta">
+                                    <span class="news-date">{{ noticia.data_publicacao|date:"d/m/Y H:i" }}</span>
+                                </div>
+                                <div class="news-button-area">
+                                    <a href="{{ noticia.get_absolute_url }}" class="btn btn-outline-primary">
+                                        Ler Notícia <i class="fas fa-arrow-right ms-2"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <p class="text-muted text-center">Nenhuma notícia em destaque no momento.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Notícias Recentes -->
+<section class="recent-news">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="section-title">Notícias Recentes</h2>
+            </div>
+        </div>
+        
+        <div class="row">
+            {% for noticia in noticias_recentes %}
+            <div class="col-12 mb-4">
+                <div class="news-item" {% if noticia.imagem %}style="background-image: url('{{ noticia.imagem.url }}')"{% endif %}>
+                    <div class="row g-0">
+                        <div class="col-12">
+                            <div class="news-content">
+                                <h3 class="news-title">
+                                    <a href="{{ noticia.get_absolute_url }}">{{ noticia.titulo }}</a>
+                                </h3>
+                                <p class="news-summary">{{ noticia.resumo }}</p>
+                                <div class="news-meta">
+                                    <span class="news-date">{{ noticia.data_publicacao|date:"d/m/Y H:i" }}</span>
+                                </div>
+                                <div class="news-button-area">
+                                    <a href="{{ noticia.get_absolute_url }}" class="btn btn-outline-primary">
+                                        Ler Notícia <i class="fas fa-arrow-right ms-2"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <p class="text-muted text-center">Nenhuma notícia recente disponível.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="newsletter-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 text-center">
+                <h3>Fique por dentro das novidades</h3>
+                <p class="mb-4">Inscreva-se em nossa newsletter para receber as principais notícias diretamente no seu email.</p>
+                <form class="newsletter-form">
+                    <div class="input-group">
+                        <input type="email" class="form-control" placeholder="Seu email" required>
+                        <button class="btn btn-primary" type="submit">Inscrever</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

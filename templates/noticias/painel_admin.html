@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Painel Administrativo - Portal de Notícias{% endblock %}
+
+{% block content %}
+<div class="admin-panel">
+    <!-- Header -->
+    <div class="admin-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="h3 mb-0">
+                        <i class="fas fa-cogs me-2"></i>
+                        Painel Administrativo
+                    </h1>
+                    <p class="mb-0 mt-2">Gerencie suas notícias de forma simples e eficiente</p>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <a href="{% url 'noticias:criar_noticia' %}" class="btn btn-light me-2">
+                        <i class="fas fa-plus me-1"></i>Nova Notícia
+                    </a>
+                    <a href="{% url 'noticias:logout_admin' %}" class="btn btn-outline-light">
+                        <i class="fas fa-sign-out-alt me-1"></i>Sair
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics -->
+    <div class="admin-stats">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <h3>{{ total_noticias }}</h3>
+                        <p>Total de Notícias</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <h3>{{ noticias_publicadas }}</h3>
+                        <p>Publicadas</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <h3>{{ noticias_rascunho }}</h3>
+                        <p>Rascunhos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="admin-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2>Últimas Notícias</h2>
+                        <a href="{% url 'noticias:criar_noticia' %}" class="btn btn-primary">
+                            <i class="fas fa-plus me-1"></i>Criar Notícia
+                        </a>
+                    </div>
+
+                    <div class="news-table">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Título</th>
+                                    <th>Status</th>
+                                    <th>Data</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for noticia in noticias %}
+                                <tr>
+                                    <td>
+                                        <strong>{{ noticia.titulo }}</strong>
+                                    </td>
+                                    <td>
+                                        {% if noticia.publicada %}
+                                            <span class="badge bg-success">Publicada</span>
+                                        {% else %}
+                                            <span class="badge bg-secondary">Rascunho</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ noticia.data_publicacao|date:"d/m/Y H:i" }}</td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <a href="{% url 'noticias:editar_noticia' noticia.pk %}" 
+                                               class="btn btn-sm btn-outline-primary" 
+                                               title="Editar">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="{% url 'noticias:noticia_detalhe' noticia.pk %}" 
+                                               class="btn btn-sm btn-outline-info" 
+                                               title="Visualizar" 
+                                               target="_blank">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="{% url 'noticias:toggle_publicacao' noticia.pk %}" 
+                                               class="btn btn-sm btn-outline-warning" 
+                                               title="{% if noticia.publicada %}Despublicar{% else %}Publicar{% endif %}">
+                                                <i class="fas fa-{% if noticia.publicada %}eye-slash{% else %}eye{% endif %}"></i>
+                                            </a>
+                                            <a href="{% url 'noticias:excluir_noticia' noticia.pk %}" 
+                                               class="btn btn-sm btn-outline-danger" 
+                                               title="Excluir">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="4" class="text-center py-4">
+                                        <i class="fas fa-newspaper fa-2x text-muted mb-2"></i>
+                                        <p class="text-muted">Nenhuma notícia encontrada.</p>
+                                        <a href="{% url 'noticias:criar_noticia' %}" class="btn btn-primary">
+                                            <i class="fas fa-plus me-1"></i>Criar Primeira Notícia
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    {% if noticias %}
+                    <div class="text-center mt-4">
+                        <a href="{% url 'noticias:lista_noticias' %}" class="btn btn-outline-primary">
+                            <i class="fas fa-list me-1"></i>Ver Todas as Notícias
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

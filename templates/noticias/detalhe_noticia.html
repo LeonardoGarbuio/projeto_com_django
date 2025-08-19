@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ noticia.titulo }} - Portal de Notícias{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'noticias:home' %}">Início</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'noticias:lista_noticias' %}">Notícias</a></li>
+                        <li class="breadcrumb-item active">{{ noticia.titulo|truncatechars:50 }}</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- News Detail -->
+<div class="news-detail">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <article class="news-article">
+                    <header class="article-header">
+                        <h1 class="article-title">{{ noticia.titulo }}</h1>
+                        <div class="article-meta">
+                            <span class="article-date">
+                                <i class="fas fa-calendar me-1"></i>
+                                {{ noticia.data_publicacao|date:"d/m/Y H:i" }}
+                            </span>
+                        </div>
+                    </header>
+
+                    {% if noticia.imagem %}
+                    <div class="article-image">
+                        <img src="{{ noticia.imagem.url }}" alt="{{ noticia.titulo }}" class="img-fluid">
+                    </div>
+                    {% endif %}
+
+                    <div class="article-content">
+                        <div class="article-summary">
+                            <p class="lead">{{ noticia.resumo }}</p>
+                        </div>
+                        
+                        <div class="article-text">
+                            {{ noticia.conteudo|linebreaks }}
+                        </div>
+                    </div>
+
+                    <footer class="article-footer">
+                        <div class="article-actions">
+                            <button class="btn btn-outline-primary me-2" onclick="toggleFavorite()">
+                                <i class="fas fa-heart me-1"></i>
+                                <span id="favorite-text">Favoritar</span>
+                            </button>
+                            <button class="btn btn-outline-secondary" onclick="shareArticle()">
+                                <i class="fas fa-share me-1"></i>
+                                Compartilhar
+                            </button>
+                        </div>
+                    </footer>
+                </article>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/main.js' %}"></script>
+{% endblock %}
