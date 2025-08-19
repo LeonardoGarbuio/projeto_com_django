@@ -2,6 +2,9 @@
 # exit on error
 set -o errexit
 
+# Definir variável de ambiente para o Django
+export DJANGO_SETTINGS_MODULE=portal_noticias.settings_render
+
 # Instalar dependências
 pip install -r requirements.txt
 
