@@ -899,149 +899,115 @@ body {
     color: #0c5460;
 }
 
-/* Home News Items with Background Image - REGRAS ESPECÍFICAS COM PRIORIDADE */
+/* Home News Items with Background Image */
 .featured-news .news-item,
 .recent-news .news-item {
-    background: white !important; /* Sobrescrever regra geral */
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    position: relative !important;
-    min-height: 400px !important;
-    display: flex !important;
-    align-items: center !important;
-    border-radius: 12px !important;
-    overflow: hidden !important;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
-    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
-    border: 2px solid #007bff !important; /* DEBUG: Borda azul */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Forçar imagem de fundo - REGRAS MAIS ESPECÍFICAS */
-.featured-news .news-item[style*="background-image"],
-.recent-news .news-item[style*="background-image"] {
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-}
-
-/* DEBUG: Adicionar borda para visualizar o elemento */
-.featured-news .news-item,
-.recent-news .news-item {
-    border: 2px solid #007bff !important;
-}
-
-/* Garantir que a imagem de fundo seja visível */
-.featured-news .news-item[style*="background-image"]::after,
-.recent-news .news-item[style*="background-image"]::after {
-    content: '🖼️ IMAGEM CARREGADA' !important;
-    position: absolute !important;
-    top: 10px !important;
-    left: 10px !important;
-    background: rgba(0, 255, 0, 0.8) !important;
-    color: white !important;
-    padding: 5px !important;
-    border-radius: 5px !important;
-    font-size: 12px !important;
-    z-index: 1000 !important;
-}
-
-/* Hover effects para notícias em destaque */
 .featured-news .news-item:hover,
 .recent-news .news-item:hover {
-    transform: translateY(-5px) !important;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25) !important;
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
 }
 
-/* Overlay escuro para melhor legibilidade do texto */
 .featured-news .news-item::before,
 .recent-news .news-item::before {
-    content: '' !important;
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 100%) !important;
-    z-index: 1 !important;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 100%);
+    z-index: 1;
 }
 
-/* Estilos para o conteúdo das notícias em destaque */
 .featured-news .news-content,
 .recent-news .news-content {
-    position: relative !important;
-    z-index: 2 !important;
-    color: white !important;
-    padding: 50px !important;
-    width: 100% !important;
+    position: relative;
+    z-index: 2;
+    color: white;
+    padding: 50px;
+    width: 100%;
 }
 
 .featured-news .news-title,
 .recent-news .news-title {
-    font-size: 2.5rem !important;
-    font-weight: 700 !important;
-    margin-bottom: 20px !important;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5) !important;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .featured-news .news-title a,
 .recent-news .news-title a {
-    color: white !important;
-    text-decoration: none !important;
-    transition: color 0.3s ease !important;
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 .featured-news .news-title a:hover,
 .recent-news .news-title a:hover {
-    color: #f8f9fa !important;
+    color: #f8f9fa;
 }
 
 .featured-news .news-summary,
 .recent-news .news-summary {
-    color: rgba(255, 255, 255, 0.95) !important;
-    font-size: 1.2rem !important;
-    line-height: 1.6 !important;
-    margin-bottom: 20px !important;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3) !important;
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .featured-news .news-meta,
 .recent-news .news-meta {
-    color: rgba(255, 255, 255, 0.9) !important;
-    font-size: 1.1rem !important;
-    margin-bottom: 30px !important;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3) !important;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .featured-news .news-button-area,
 .recent-news .news-button-area {
-    position: relative !important;
-    z-index: 2 !important;
-    margin-top: 30px !important;
+    position: relative;
+    z-index: 2;
+    margin-top: 30px;
 }
 
 .featured-news .news-button-area .btn,
 .recent-news .news-button-area .btn {
-    background-color: rgba(255, 255, 255, 0.95) !important;
-    border: 2px solid white !important;
-    color: #333 !important;
-    padding: 15px 35px !important;
-    font-size: 1.1rem !important;
-    font-weight: 600 !important;
-    border-radius: 8px !important;
-    transition: all 0.3s ease !important;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
-    text-decoration: none !important;
-    display: inline-block !important;
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 2px solid white;
+    color: #333;
+    padding: 15px 35px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    display: inline-block;
 }
 
 .featured-news .news-button-area .btn:hover,
 .recent-news .news-button-area .btn:hover {
-    background-color: white !important;
-    color: #333 !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3) !important;
-    text-decoration: none !important;
+    background-color: white;
+    color: #333;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
 }
 
 /* Login Form Additional Styles */
@@ -1295,3 +1261,9 @@ body {
 .toast-error {
     border-left: 4px solid #dc3545;
 }
+
+
+
+
+
+
