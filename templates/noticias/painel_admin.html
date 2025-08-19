@@ -72,6 +72,8 @@
                                 <tr>
                                     <th>Título</th>
                                     <th>Status</th>
+                                    <th>Destaque</th>
+                                    <th>Relevância</th>
                                     <th>Data</th>
                                     <th>Ações</th>
                                 </tr>
@@ -88,6 +90,23 @@
                                         {% else %}
                                             <span class="badge bg-secondary">Rascunho</span>
                                         {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if noticia.destaque %}
+                                            <span class="badge bg-warning text-dark">
+                                                <i class="fas fa-star me-1"></i>Destaque
+                                            </span>
+                                        {% else %}
+                                            <span class="badge bg-light text-dark">Normal</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <div class="relevancia-score">
+                                            <span class="score-number">{{ noticia.relevancia_score }}/10</span>
+                                            <div class="score-bar">
+                                                <div class="score-fill" style="width: {{ noticia.relevancia_score|floatformat:0 }}%"></div>
+                                            </div>
+                                        </div>
                                     </td>
                                     <td>{{ noticia.data_publicacao|date:"d/m/Y H:i" }}</td>
                                     <td>
@@ -118,7 +137,7 @@
                                 </tr>
                                 {% empty %}
                                 <tr>
-                                    <td colspan="4" class="text-center py-4">
+                                    <td colspan="6" class="text-center py-4">
                                         <i class="fas fa-newspaper fa-2x text-muted mb-2"></i>
                                         <p class="text-muted">Nenhuma notícia encontrada.</p>
                                         <a href="{% url 'noticias:criar_noticia' %}" class="btn btn-primary">

@@ -49,16 +49,15 @@ class NoticiaDetailView(DetailView):
         return context
 
 def home(request):
-    # Buscar notícias em destaque (as mais recentes)
+    # Buscar notícias em destaque (marcadas manualmente como destaque)
     noticias_destaque = Noticia.objects.filter(
-        publicada=True
+        publicada=True,
+        destaque=True
     ).order_by('-data_publicacao')[:3]
     
-    # Buscar notícias recentes (excluindo as já em destaque)
+    # Buscar notícias recentes (todas as mais recentes, incluindo novas)
     noticias_recentes = Noticia.objects.filter(
         publicada=True
-    ).exclude(
-        id__in=[n.id for n in noticias_destaque]
     ).order_by('-data_publicacao')[:6]
     
     context = {
@@ -124,7 +123,11 @@ def criar_noticia(request):
             noticia.data_publicacao = timezone.now()  # Define a data automaticamente
             noticia.publicada = True  # Por padrão, publica a notícia
             noticia.save()
-            messages.success(request, f'Notícia "{noticia.titulo}" criada com sucesso!')
+            
+            # Calcula relevância automaticamente
+            noticia.calcular_relevancia()
+            
+            messages.success(request, f'Notícia "{noticia.titulo}" criada com sucesso! Score de relevância: {noticia.relevancia_score}/10')
             return redirect('noticias:painel_admin')
     else:
         form = NoticiaForm()
@@ -139,7 +142,11 @@ def editar_noticia(request, pk):
         form = NoticiaForm(request.POST, request.FILES, instance=noticia)
         if form.is_valid():
             noticia = form.save()  # Não altera a data de publicação
-            messages.success(request, f'Notícia "{noticia.titulo}" atualizada com sucesso!')
+            
+            # Recalcula relevância
+            noticia.calcular_relevancia()
+            
+            messages.success(request, f'Notícia "{noticia.titulo}" atualizada com sucesso! Score de relevância: {noticia.relevancia_score}/10')
             return redirect('noticias:painel_admin')
     else:
         form = NoticiaForm(instance=noticia)

@@ -55,11 +55,18 @@
 
                     <footer class="article-footer">
                         <div class="article-actions">
-                            <button class="btn btn-outline-primary me-2" onclick="toggleFavorite()">
-                                <i class="fas fa-heart me-1"></i>
-                                <span id="favorite-text">Favoritar</span>
+                            <button class="btn btn-outline-primary me-2 favorite-btn" 
+                                    data-noticia-id="{{ noticia.id }}"
+                                    data-bs-toggle="tooltip" 
+                                    title="Adicionar aos favoritos">
+                                <i class="far fa-heart me-1"></i>
+                                <span>Favoritar</span>
                             </button>
-                            <button class="btn btn-outline-secondary" onclick="shareArticle()">
+                            <button class="btn btn-outline-secondary share-btn" 
+                                    data-url="{{ request.build_absolute_uri }}"
+                                    data-title="{{ noticia.titulo }}"
+                                    data-bs-toggle="tooltip" 
+                                    title="Compartilhar notícia">
                                 <i class="fas fa-share me-1"></i>
                                 Compartilhar
                             </button>
@@ -73,5 +80,5 @@
 {% endblock %}
 
 {% block extra_js %}
-<script src="{% static 'js/main.js' %}"></script>
+<script src="{% static 'js/noticia-detalhe.js' %}"></script>
 {% endblock %}
